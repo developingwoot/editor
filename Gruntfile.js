@@ -1,6 +1,35 @@
+'use strict';
+
 module.exports = function(grunt) {
 
 	grunt.initConfig({
+        pkg: grunt.file.readJSON('package.json'),
+        /**
+         * Set project object
+         */
+        project: {
+            app: './',
+            assets: '<%= project.src %>/assets',
+            src: '<%= project.app %>src',
+            css: [
+                './node_modules/foundation-sites/scss',
+                '<%= project.assets %>/scss/style.scss'
+            ],
+            dist : '<%= project.app %>dist'
+        },
+        /**
+         * Project banner
+         */
+        tag: {
+            banner : ' /*!\n' +
+                    ' * <%= pkg.name %>\n' +
+                    ' * <%= pkg.title %>\n' +
+                    ' * <%= pkg.url %>\n' +
+                    ' * @author <%= pkg.author %>\n' +
+                    ' * @version <%= pkg.version %>\n' +
+                    ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
+                    ' */\n'
+        },
 		webpack: {
 			"build-dev": {
                 entry: "./src/index.tsx",
@@ -41,11 +70,18 @@ module.exports = function(grunt) {
         sass: {
             dist: {
                 options: {
-                    loadPath: ['./node_modules/foundation-sites/scss'],
-                    dest : './dist'
+                    style: 'expanded',
+                    loadPath: [
+                        './node_modules/foundation-sites/scss',
+                        './node_modules/foundation-sites/scss/settings'
+                                ]
+                },
+                files: {
+                    '<%= project.dist %>/css/styles.css' : '<%= project.assets %>/scss/styles.scss',
+                    '<%= project.dist %>/css/foundation.css' : './node_modules/foundation-sites/scss/foundation.scss'
                 }
             }
-        },
+            },
 		watch: {
 			app: {
 				files: "./src/**/*.tsx",
@@ -55,7 +91,8 @@ module.exports = function(grunt) {
 				}
 			},
             scss : {
-                files : "./node_modules/foundation-sites/scss",
+                files : ["./node_modules/foundation-sites/scss/**/*.scss", 
+                "<%= project.assets %>/scss/styles.scss"],
                 tasks : "sass"
             }
 		}
@@ -68,7 +105,7 @@ module.exports = function(grunt) {
 	// Advantage: No server required, can run app from filesystem
 	// Disadvantage: Requests are not blocked until bundle is available,
 	//               can serve an old app on too fast refresh
-	grunt.registerTask("dev", ["webpack:build-dev", "watch:app"]);
+	grunt.registerTask("dev", ["webpack:build-dev", "sass", "watch"]);
 
 	// Production build
 	grunt.registerTask("build", ["webpack:build-dev"]);
