@@ -3,16 +3,29 @@
     <head>
         <meta charset="UTF-8" />
         <title>Hello React!</title>
-        <link rel="stylesheet" type="text/css" href="./dist/css/styles.css"
+        <link rel="stylesheet" type="text/css" href="./dist/css/styles.css" />
+        <script>
+            window.nodeRequire = require;
+            delete window.require;
+            delete window.exports;
+            delete window.module;
+        </script>
+        <script type="text/javascript" src="./node_modules/jquery/dist/jquery.min.js"></script>
     </head>
     <body>
         <div id="example"></div>
 
         <!-- Dependencies -->
+        <script src="./dist/foundation.bundle.js"></script>
         <script src="./node_modules/react/dist/react.js"></script>
         <script src="./node_modules/react-dom/dist/react-dom.js"></script>
 
         <!-- Main -->
-        <script src="./dist/bundle.js"></script>
+        
+
+        <script src="./dist/sour-mash.js"></script>
+        <script>
+            $(document).foundation();
+        </script>
     </body>
 </html>

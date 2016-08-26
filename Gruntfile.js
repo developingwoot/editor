@@ -32,9 +32,13 @@ module.exports = function(grunt) {
         },
 		webpack: {
 			"build-dev": {
-                entry: "./src/index.tsx",
+                entry: {
+                    "sour-mash" : "./src/index.tsx",
+                    "foundation" : "./node_modules/foundation-sites/dist/foundation.js",
+                    "jquery" : "./node_modules/jquery/dist/jquery.js"
+                },
                 output: {
-                    filename: "./dist/bundle.js",
+                    filename: "./dist/[name].js",
                 },
 
                 // Enable sourcemaps for debugging webpack's output.
