@@ -2,8 +2,9 @@ import * as React from "react";
 import * as ReactDOM from "react-dom";
 
 import { Hello } from "./components/hello";
+import { Button } from "./components/button";
 
 ReactDOM.render(
-    <Hello compiler="TypeScript" framework="Reactjs 1"/>,
+    <Button value="Submit" id="test-button" name="submit-main" />,
     document.getElementById("example")
 );

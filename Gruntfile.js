@@ -33,9 +33,10 @@ module.exports = function(grunt) {
 		webpack: {
 			"build-dev": {
                 entry: {
-                    "sour-mash" : "./src/index.tsx",
-                    "foundation" : "./node_modules/foundation-sites/dist/foundation.js",
-                    "jquery" : "./node_modules/jquery/dist/jquery.js"
+                    "sour-mash" : ["./src/index.tsx",
+                    "./node_modules/jquery/dist/jquery.js",
+                    "./node_modules/foundation-sites/dist/foundation.js"
+                    ]
                 },
                 output: {
                     filename: "./dist/js/[name].js",
