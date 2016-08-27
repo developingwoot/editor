@@ -1,4 +1,5 @@
 'use strict';
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
 
 module.exports = function(grunt) {
 
@@ -53,13 +54,26 @@ module.exports = function(grunt) {
                 module: {
                     loaders: [
                         // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-                        { test: /\.tsx?$/, loader: "ts-loader" }
+                        { test: /\.tsx?$/, loader: "ts-loader" },
+                        { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass')}
                     ],
 
                     preLoaders: [
                         // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
                         { test: /\.js$/, loader: "source-map-loader" }
                     ]
+                },
+                plugins: [
+                    new ExtractTextPlugin('./dist/css/styles.css', {
+                        allChunks: true
+                    })
+                ],
+
+                sassLoader: {
+                    includePaths: [
+                        './node_modules/foundation-sites/scss',
+                        './node_modules/foundation-sites/scss/settings'
+                                ]
                 },
 
                 // When importing a module whose path matches one of the following, just
@@ -98,24 +112,10 @@ module.exports = function(grunt) {
             }
 
         },
-        sass: {
-            dist: {
-                options: {
-                    style: 'expanded',
-                    loadPath: [
-                        './node_modules/foundation-sites/scss',
-                        './node_modules/foundation-sites/scss/settings'
-                                ]
-                },
-                files: {
-                    '<%= project.dist %>/css/styles.css' : '<%= project.assets %>/scss/styles.scss',
-                    '<%= project.dist %>/css/foundation.css' : './node_modules/foundation-sites/scss/foundation.scss'
-                }
-            }
-        },
 		watch: {
 			app: {
-				files: "./src/**/*.tsx",
+				files: ["./src/**/*.tsx",
+                "./src/**/*.html"],
 				tasks: "webpack:build-dev",
 				options: {
 					spawn: false,
@@ -124,7 +124,7 @@ module.exports = function(grunt) {
             scss : {
                 files : ["./node_modules/foundation-sites/scss/**/*.scss", 
                 "<%= project.assets %>/scss/styles.scss"],
-                tasks : "sass"
+                tasks : "webpack:build-dev"
             }
 		}
 	});
@@ -132,11 +132,12 @@ module.exports = function(grunt) {
 	require("matchdep").filterAll("grunt-*").forEach(grunt.loadNpmTasks);
 	var webpack = require("webpack");
 	var webpackConfig = require("./webpack.config.js");
+
 	// Build and watch cycle (another option for development)
 	// Advantage: No server required, can run app from filesystem
 	// Disadvantage: Requests are not blocked until bundle is available,
 	//               can serve an old app on too fast refresh
-	grunt.registerTask("dev", ["webpack:build-dev", "sass", "copy", "watch"]);
+	grunt.registerTask("dev", ["webpack:build-dev", "copy", "watch"]);
 
 	// Production build
 	grunt.registerTask("build", ["webpack:build-dev"]);

@@ -1,7 +1,15 @@
+'use strict';
+var ExtractTextPlugin = require('extract-text-webpack-plugin');
+
 module.exports = {
-    entry: "./src/index.tsx",
+    entry: {
+        "sour-mash" : ["./src/index.tsx",
+        "./node_modules/jquery/dist/jquery.js",
+        "./node_modules/foundation-sites/dist/foundation.js"
+        ]
+    },
     output: {
-        filename: "./dist/bundle.js",
+        filename: "./dist/js/[name].js",
     },
 
     // Enable sourcemaps for debugging webpack's output.
@@ -15,13 +23,26 @@ module.exports = {
     module: {
         loaders: [
             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-            { test: /\.tsx?$/, loader: "ts-loader" }
+            { test: /\.tsx?$/, loader: "ts-loader" },
+            { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass')}
         ],
 
         preLoaders: [
             // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
             { test: /\.js$/, loader: "source-map-loader" }
         ]
+    },
+    plugins: [
+        new ExtractTextPlugin('./dist/css/styles.css', {
+            allChunks: true
+        })
+    ],
+
+    sassLoader: {
+        includePaths: [
+            './node_modules/foundation-sites/scss',
+            './node_modules/foundation-sites/scss/settings'
+                    ]
     },
 
     // When importing a module whose path matches one of the following, just
@@ -31,5 +52,5 @@ module.exports = {
     externals: {
         "react": "React",
         "react-dom": "ReactDOM"
-    },
-};
+    }
+}

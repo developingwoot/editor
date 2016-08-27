@@ -1,6 +1,7 @@
 {
   "globalDependencies": {
     "react": "registry:dt/react#0.14.0+20160817201227",
-    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040"
+    "react-dom": "registry:dt/react-dom#0.14.0+20160412154040",
+    "react-router": "github:DefinitelyTyped/DefinitelyTyped/react-router/react-router.d.ts#310c247694d7f31bd2e3198f71c55221f7c3a3c7"
   }
 }
