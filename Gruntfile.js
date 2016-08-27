@@ -38,7 +38,7 @@ module.exports = function(grunt) {
                     "jquery" : "./node_modules/jquery/dist/jquery.js"
                 },
                 output: {
-                    filename: "./dist/[name].js",
+                    filename: "./dist/js/[name].js",
                 },
 
                 // Enable sourcemaps for debugging webpack's output.
@@ -71,6 +71,32 @@ module.exports = function(grunt) {
                 }
 			}
 		},
+        copy: {
+            main :{
+                files: [{
+                    src: './src/index.html',           // copy all files and subfolders
+                    dest: './dist/index.html',    // destination folder
+                },
+                {
+                    src: './src/main.js',
+                    dest: './dist/main.js'
+                },
+                {
+                    src: './src/package.json',
+                    dest: './dist/package.json'
+                }]
+            },
+            react :{
+                files: [{
+                    src : './node_modules/react/dist/react.js',
+                    dest: './dist/js/react.js'
+                },{
+                    src : './node_modules/react-dom/dist/react-dom.js',
+                    dest: './dist/js/react-dom.js'
+                }]
+            }
+
+        },
         sass: {
             dist: {
                 options: {
@@ -85,7 +111,7 @@ module.exports = function(grunt) {
                     '<%= project.dist %>/css/foundation.css' : './node_modules/foundation-sites/scss/foundation.scss'
                 }
             }
-            },
+        },
 		watch: {
 			app: {
 				files: "./src/**/*.tsx",
@@ -109,7 +135,7 @@ module.exports = function(grunt) {
 	// Advantage: No server required, can run app from filesystem
 	// Disadvantage: Requests are not blocked until bundle is available,
 	//               can serve an old app on too fast refresh
-	grunt.registerTask("dev", ["webpack:build-dev", "sass", "watch"]);
+	grunt.registerTask("dev", ["webpack:build-dev", "sass", "copy", "watch"]);
 
 	// Production build
 	grunt.registerTask("build", ["webpack:build-dev"]);

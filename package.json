@@ -2,10 +2,15 @@
   "name": "editor",
   "verson": "0.0.1",
   "main": "main.js",
-  "author" : "Woot",
-  "license" : "MIT",
+  "author": "Woot",
+  "license": "MIT",
+  "scripts": {
+    "build" : "grunt dev",
+    "electron" : "electron dist"
+  },
   "devDependencies": {
     "grunt": "^1.0.1",
+    "grunt-contrib-copy": "^1.0.0",
     "grunt-contrib-sass": "^1.0.0",
     "grunt-contrib-watch": "^1.0.0",
     "grunt-webpack": "^1.0.14",

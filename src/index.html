@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta charset="UTF-8" />
+        <title>Hello React!</title>
+        <link rel="stylesheet" type="text/css" href="./css/styles.css" />
+        <script>
+            window.nodeRequire = require;
+            delete window.require;
+            delete window.exports;
+            delete window.module;
+        </script>
+        <script type="text/javascript" src="./js/jquery.js"></script>
+    </head>
+    <body>
+        <div id="example"></div>
+
+        <!-- Dependencies -->
+        <script src="./js/react.js"></script>
+        <script src="./js/react-dom.js"></script>
+
+        <!-- Main -->
+        <script src="./js/sour-mash.js"></script>
+    </body>
+</html>
