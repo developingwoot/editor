@@ -117,7 +117,6 @@ module.exports = function(grunt) {
 
 	require("matchdep").filterAll("grunt-*").forEach(grunt.loadNpmTasks);
 	var webpack = require("webpack");
-	var webpackConfig = require("./webpack.config.js");
 
 	// Build and watch cycle (another option for development)
 	// Advantage: No server required, can run app from filesystem
