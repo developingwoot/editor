@@ -4,8 +4,7 @@ var ExtractTextPlugin = require('extract-text-webpack-plugin');
 module.exports = {
     entry: {
         "sour-mash" : ["./src/index.tsx",
-        "./node_modules/jquery/dist/jquery.js",
-        "./node_modules/foundation-sites/dist/foundation.js"
+        "./src/assets/scss/styles.scss"
         ]
     },
     output: {

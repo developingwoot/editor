@@ -18,19 +18,6 @@ module.exports = function(grunt) {
             ],
             dist : '<%= project.app %>dist'
         },
-        /**
-         * Project banner
-         */
-        tag: {
-            banner : ' /*!\n' +
-                    ' * <%= pkg.name %>\n' +
-                    ' * <%= pkg.title %>\n' +
-                    ' * <%= pkg.url %>\n' +
-                    ' * @author <%= pkg.author %>\n' +
-                    ' * @version <%= pkg.version %>\n' +
-                    ' * Copyright <%= pkg.copyright %>. <%= pkg.license %> licensed.\n' +
-                    ' */\n'
-        },
 		webpack: {
 			"build-dev": {
                     entry: {
