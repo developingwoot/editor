@@ -33,57 +33,56 @@ module.exports = function(grunt) {
         },
 		webpack: {
 			"build-dev": {
-                entry: {
-                    "sour-mash" : ["./src/index.tsx",
-                    "./node_modules/jquery/dist/jquery.js",
-                    "./node_modules/foundation-sites/dist/foundation.js"
-                    ]
-                },
-                output: {
-                    filename: "./dist/js/[name].js",
-                },
+                    entry: {
+                        "sour-mash" : ["./src/index.tsx",
+                        "./src/assets/scss/styles.scss"
+                        ]
+                    },
+                    output: {
+                        filename: "./dist/js/[name].js",
+                    },
 
-                // Enable sourcemaps for debugging webpack's output.
-                devtool: "source-map",
+                    // Enable sourcemaps for debugging webpack's output.
+                    devtool: "source-map",
 
-                resolve: {
-                    // Add '.ts' and '.tsx' as resolvable extensions.
-                    extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
-                },
+                    resolve: {
+                        // Add '.ts' and '.tsx' as resolvable extensions.
+                        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+                    },
 
-                module: {
-                    loaders: [
-                        // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
-                        { test: /\.tsx?$/, loader: "ts-loader" },
-                        { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass')}
+                    module: {
+                        loaders: [
+                            // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+                            { test: /\.tsx?$/, loader: "ts-loader" },
+                            { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass')}
+                        ],
+
+                        preLoaders: [
+                            // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
+                            { test: /\.js$/, loader: "source-map-loader" }
+                        ]
+                    },
+                    plugins: [
+                        new ExtractTextPlugin('./dist/css/styles.css', {
+                            allChunks: true
+                        })
                     ],
 
-                    preLoaders: [
-                        // All output '.js' files will have any sourcemaps re-processed by 'source-map-loader'.
-                        { test: /\.js$/, loader: "source-map-loader" }
-                    ]
-                },
-                plugins: [
-                    new ExtractTextPlugin('./dist/css/styles.css', {
-                        allChunks: true
-                    })
-                ],
+                    sassLoader: {
+                        includePaths: [
+                            './node_modules/foundation-sites/scss',
+                            './node_modules/foundation-sites/scss/settings'
+                                    ]
+                    },
 
-                sassLoader: {
-                    includePaths: [
-                        './node_modules/foundation-sites/scss',
-                        './node_modules/foundation-sites/scss/settings'
-                                ]
-                },
-
-                // When importing a module whose path matches one of the following, just
-                // assume a corresponding global variable exists and use that instead.
-                // This is important because it allows us to avoid bundling all of our
-                // dependencies, which allows browsers to cache those libraries between builds.
-                externals: {
-                    "react": "React",
-                    "react-dom": "ReactDOM"
-                }
+                    // When importing a module whose path matches one of the following, just
+                    // assume a corresponding global variable exists and use that instead.
+                    // This is important because it allows us to avoid bundling all of our
+                    // dependencies, which allows browsers to cache those libraries between builds.
+                    externals: {
+                        "react": "React",
+                        "react-dom": "ReactDOM"
+                    }
 			}
 		},
         copy: {
