@@ -9,6 +9,7 @@ export class Navigation extends React.Component<{}, {}> {
     render() {
         return (
             <ul role="nav" style={menuStyle} className={"menu align-right"}>
+                <li><Link to="settings">Settings</Link></li>
                 <li><Link to="posts">Posts</Link></li>
                 <li><Link to="/">Dashboard</Link></li>
                 <li className={"menu-text"}>Sour Mash</li>

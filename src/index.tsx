@@ -4,7 +4,12 @@ import {  Route, Router, hashHistory, IndexRoute } from "react-router";
 import { Navigation } from "./components/layout/navigation";
 import { Dashboard } from "./components/pages/dashboard";
 import { Posts } from "./components/pages/posts";
+import { Settings } from "./components/pages/settings"
 
+
+var containerStyle = {
+    "minWidth" : "400px"
+};
 
 export default /**
  * App extends React.Component
@@ -17,7 +22,7 @@ class App extends React.Component <{}, {}> {
                 <div id="wrapper" className="container">
                 <section id="content">
                     <div className="inner">
-                    <div id="app">
+                    <div id="app" className={'containerStyle'}>
                         {this.props.children}
                     </div>
                     </div>
@@ -33,6 +38,7 @@ ReactDOM.render((
             <Route path="/" component={App}>
                 <IndexRoute component={Dashboard} />
                 <Route path="posts" component={Posts}/>
+                <Route path="settings" component={Settings} />
             </Route>
         </Router>
    ), document.getElementById("app-main")
