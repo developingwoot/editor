@@ -1,5 +1,7 @@
 # Sour Mash
 
+A simple project using Electron, React, and Webpack
+
 Clone then Run
 
 `npm install`
