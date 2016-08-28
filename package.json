@@ -5,8 +5,9 @@
   "author": "Woot",
   "license": "MIT",
   "scripts": {
-    "build": "grunt dev",
-    "electron": "electron dist"
+    "grunt": "grunt build",
+    "electron": "electron dist",
+    "build" : "npm run grunt && npm run electron"
   },
   "devDependencies": {
     "babel-core": "^6.14.0",
