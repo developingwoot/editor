@@ -8,10 +8,10 @@ export class Settings extends React.Component<{}, {}> {
         return (
             <div className={"medium-12 colums"}>
                 <div className={'row'} >
-                    <div className={'medium-2 colums'} >
+                    <div className={'small-2 medium-2 colums'} >
                         <h3>Settings</h3>
                     </div>
-                    <div className={'medium-1 medium-offset-4 colums'} >
+                    <div className={'small-1 small-offset-3 medium-1 medium-offset-4 colums'} >
                         <Button id="settings-save" name="settings-save" value="Save" />
                     </div>
                 </div>
