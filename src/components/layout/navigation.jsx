@@ -1,9 +1,7 @@
 import * as React from "react";
 import { Link } from "react-router";
 
-
-
-export class Navigation extends React.Component<{}, {}> {
+export class Navigation extends React.Component {
     render() {
         return (
             <ul role="nav" className={"menu align-right"}>

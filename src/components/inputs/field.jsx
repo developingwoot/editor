@@ -1,8 +1,6 @@
 import * as React from "react";
 
-export interface InputProps { name: string; label: string; type: string; }
-
-export class InputField extends React.Component<InputProps, {}> {
+export class InputField extends React.Component {
     render() {
         return (
             <div className="medium-6 columns">

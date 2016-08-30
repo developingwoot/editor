@@ -1,9 +1,8 @@
 import * as React from "react";
-import { InputField } from '../../components/inputs/InputField'
+import { InputField } from '../../components/inputs/field'
 import { Button } from '../../components/inputs/button'
 
-
-export class Settings extends React.Component<{}, {}> {
+export class Settings extends React.Component {
     render() {
         return (
             <div className={"medium-12 colums"}>

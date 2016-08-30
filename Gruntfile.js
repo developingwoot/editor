@@ -21,7 +21,7 @@ module.exports = function(grunt) {
 		webpack: {
 			"build-dev": {
                     entry: {
-                        "sour-mash" : ["./src/index.tsx",
+                        "sour-mash" : ["./src/index.jsx",
                         "./src/assets/scss/styles.scss"
                         ]
                     },
@@ -34,12 +34,13 @@ module.exports = function(grunt) {
 
                     resolve: {
                         // Add '.ts' and '.tsx' as resolvable extensions.
-                        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js"]
+                        extensions: ["", ".webpack.js", ".web.js", ".ts", ".tsx", ".js", ".jsx"]
                     },
 
                     module: {
                         loaders: [
                             // All files with a '.ts' or '.tsx' extension will be handled by 'ts-loader'.
+                            { test: /\.jsx?$/, loader : "babel" },
                             { test: /\.tsx?$/, loader: "ts-loader" },
                             { test: /\.scss$/, loader: ExtractTextPlugin.extract('css!sass')}
                         ],
