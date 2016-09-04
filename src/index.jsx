@@ -8,7 +8,8 @@ import { Settings } from "./components/pages/settings"
 
 
 var containerStyle = {
-    "minWidth" : "400px"
+    "minWidth" : "400px",
+    "height" : "100%"
 };
 
 export default /**
